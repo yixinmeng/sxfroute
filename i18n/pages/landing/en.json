@@ -9,7 +9,12 @@
       "url": "/"
     }
   },
-  "hero": {},
+  "hero": {
+    "updateNotice": {
+      "title": "Updated for the 2026 autumn schedule",
+      "description": "Valid September 1—October 24"
+    }
+  },
   "flightData": {
     "name": "flightData",
     "title": "Flight Search",

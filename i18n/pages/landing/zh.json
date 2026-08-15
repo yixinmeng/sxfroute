@@ -9,7 +9,12 @@
       "url": "/zh"
     }
   },
-  "hero": {},
+  "hero": {
+    "updateNotice": {
+      "title": "已更新为 2026 秋季航班",
+      "description": "适用日期：9 月 1 日—10 月 24 日"
+    }
+  },
   "flightData": {
     "name": "flightData",
     "title": "航班查询",
