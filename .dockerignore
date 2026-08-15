@@ -4,6 +4,6 @@ node_modules
 .gitignore
 *.md
 docs/
-.env.local
-.env*.local
+.env*
+!.env.example
 .worktrees/

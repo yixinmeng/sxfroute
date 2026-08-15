@@ -32,8 +32,8 @@
 
 ### 前置要求
 
-- **Node.js 18+**（推荐 20 LTS）
-- **pnpm**（推荐 8+）：`npm install -g pnpm`
+- **Node.js 22 LTS**
+- **pnpm 9.15.9**（由 Corepack 按 `packageManager` 自动选择）：`corepack enable`
 - **高德地图 JS API Key**（免费申请，见下文）
 
 ### 方式 1：Docker 一键启动（推荐）

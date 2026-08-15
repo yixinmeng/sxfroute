@@ -73,8 +73,8 @@
 ## 开发环境
 
 见 [README.md](./README.md) 的"快速开始"章节。本项目使用：
-- Node.js 18+（推荐 20 LTS）
-- pnpm 8+
+- Node.js 22 LTS
+- pnpm 9.15.9（通过 Corepack 管理）
 - TypeScript 严格模式
 
 ## 行为准则 / Code of Conduct
