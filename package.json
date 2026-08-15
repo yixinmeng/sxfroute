@@ -1,6 +1,7 @@
 {
   "name": "sxfroute",
   "version": "0.1.0",
+  "packageManager": "pnpm@9.15.9",
   "private": true,
   "description": "海航随心飞助手 - 中国航班数据查询工具",
   "author": "yixinmeng",

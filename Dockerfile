@@ -1,18 +1,21 @@
-FROM node:18-alpine AS base
+FROM node:22-alpine3.24 AS base
+
+ARG PNPM_VERSION=9.15.9
+RUN corepack enable && corepack prepare pnpm@${PNPM_VERSION} --activate
 
 # 安装依赖阶段
 FROM base AS deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
-RUN corepack enable pnpm && pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # 构建阶段
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN corepack enable pnpm && pnpm build
+RUN pnpm build
 
 # 运行阶段
 FROM base AS runner
@@ -34,6 +37,6 @@ ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
 
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
-  CMD node -e "fetch('http://localhost:3000/api/init').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))"
+  CMD node -e "fetch('http://127.0.0.1:3000/api/init').then(r=>{if(!r.ok)throw r;process.exit(0)}).catch(()=>process.exit(1))"
 
 CMD ["node", "server.js"]
