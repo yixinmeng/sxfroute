@@ -15,6 +15,11 @@ export interface FlightData {
   dep_time: string
   arr_time: string
   is_2666_exclusive?: boolean
+  product?: string
+  note?: string
+  valid_from?: string
+  valid_to?: string
+  operating_dates?: string[]
   hasReturn?: boolean  // 是否有返程直飞航班
 }
 

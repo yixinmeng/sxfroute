@@ -9,6 +9,7 @@ import {
   bitmapToWeekStr,
   minutesToTimeCompact,
   is2666Exclusive,
+  is2666OnlyProduct,
   getCsvField,
 } from './utils';
 
@@ -61,6 +62,13 @@ async function readAndParse(mtimeMs: number): Promise<CacheBundle> {
     const dest_province = getCsvField(record, ['降落城市所属省/市']);
     const dest_iata_code = getCsvField(record, ['降落机场IATA代码']);
     const product = getCsvField(record, ['产品', '适用档位']);
+    const source_note = getCsvField(record, ['备注']);
+    const valid_from = getCsvField(record, ['有效开始日期', 'valid_from']);
+    const valid_to = getCsvField(record, ['有效结束日期', 'valid_to']);
+    const operating_dates_raw = getCsvField(record, ['指定日期', 'operating_dates']);
+    const operating_dates = operating_dates_raw
+      ? operating_dates_raw.split(/[|；;]+/).map((value) => value.trim()).filter(Boolean)
+      : undefined;
 
     // 城市名为空时从机场名兜底（旧表头不规范时用）
     if (!origin_city && origin_airport) {
@@ -96,6 +104,10 @@ async function readAndParse(mtimeMs: number): Promise<CacheBundle> {
       arr_minutes,
       overnight,
       product,
+      source_note,
+      valid_from,
+      valid_to,
+      operating_dates,
     });
 
     if (origin_city && dest_city) {
@@ -124,7 +136,12 @@ async function readAndParse(mtimeMs: number): Promise<CacheBundle> {
     dest_iata_code: f.dest_iata_code,
     dep_time: minutesToTimeCompact(f.dep_minutes),
     arr_time: minutesToTimeCompact(f.arr_minutes),
-    is_2666_exclusive: is2666Exclusive(f.dep_minutes),
+    is_2666_exclusive: is2666OnlyProduct(f.product) || is2666Exclusive(f.dep_minutes),
+    product: f.product,
+    note: f.source_note,
+    valid_from: f.valid_from,
+    valid_to: f.valid_to,
+    operating_dates: f.operating_dates,
     hasReturn: cityPairMap.has(`${f.dest_city}-${f.origin_city}`),
   }));
 

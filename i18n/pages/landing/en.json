@@ -32,7 +32,7 @@
       },
       {
         "title": "How is the accuracy of flight data ensured?",
-        "description": "Our flight data was compiled from Hainan Airlines' publicly available flight schedules, covering the schedule window 2025-09-01 to 2025-10-25. This is a historical snapshot and will not be continuously updated. We still recommend confirming flight information through official Hainan Airlines channels before booking."
+        "description": "The current dataset is an August 2026 snapshot compiled from publicly available schedules. It covers 2026-09-01 through 2026-10-24 and applies the source table's date-specific notes. It is not real-time; confirm every flight through official airline channels before booking."
       },
       {
         "title": "What are 2666-exclusive flights?",

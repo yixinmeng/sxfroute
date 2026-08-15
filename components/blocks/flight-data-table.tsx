@@ -160,6 +160,16 @@ export function FlightDataTable() {
           return <FlightDaysDisplay days={days} variant="dots" />
         },
       }),
+      columnHelper.accessor("note", {
+        header: () => <span className="whitespace-nowrap">有效期</span>,
+        cell: info => info.getValue() ? (
+          <Badge variant="outline" className="whitespace-nowrap border-amber-400 text-amber-700 dark:text-amber-300">
+            {info.getValue()}
+          </Badge>
+        ) : (
+          <span className="text-xs text-muted-foreground">全期</span>
+        ),
+      }),
       columnHelper.accessor("origin_airport", {
         header: () => <span className="whitespace-nowrap">起飞机场</span>,
         cell: info => (
@@ -503,6 +513,11 @@ export function FlightDataTable() {
                   {flight.dest_iata_code && ` (${flight.dest_iata_code})`}
                 </span>
               </div>
+              {flight.note && (
+                <div className="mt-2 text-xs text-amber-700 dark:text-amber-300">
+                  有效期：{flight.note}
+                </div>
+              )}
             </div>
           )
         })}

@@ -53,7 +53,7 @@ export const airportCoordinates: Record<string, { lat: number; lng: number; name
   "兰州中川国际机场": { lat: 36.5152, lng: 103.6204, name: "兰州中川国际机场", iata: "LHW" },
   "银川河东国际机场": { lat: 38.4819, lng: 106.0092, name: "银川河东国际机场", iata: "INC" },
   "西宁曹家堡国际机场": { lat: 36.5275, lng: 102.0428, name: "西宁曹家堡国际机场", iata: "XNN" },
-  "乌鲁木齐地窝堡国际机场": { lat: 43.9071, lng: 87.4742, name: "乌鲁木齐地窝堡国际机场", iata: "URC" },
+  "乌鲁木齐天山国际机场": { lat: 43.9071, lng: 87.4742, name: "乌鲁木齐天山国际机场", iata: "URC" },
   
   // 其他主要机场
   "烟台蓬莱国际机场": { lat: 37.6597, lng: 120.9778, name: "烟台蓬莱国际机场", iata: "YNT" },
@@ -92,10 +92,10 @@ export const airportCoordinates: Record<string, { lat: number; lng: number; name
   "塔城机场": { lat: 46.6725, lng: 83.3408, name: "塔城机场", iata: "TCG" },
   
   // 继续补充缺失的机场坐标
-  "井冈山机场": { lat: 26.8569, lng: 114.7372, name: "井冈山机场", iata: "JGS" },
+  "吉安井冈山机场": { lat: 26.8569, lng: 114.7372, name: "吉安井冈山机场", iata: "JGS" },
   "大理凤仪机场": { lat: 25.6494, lng: 100.3192, name: "大理凤仪机场", iata: "DLU" },
   "安康富强机场": { lat: 32.7081, lng: 108.9309, name: "安康富强机场", iata: "AKA" },
-  "安阳红旗渠机场": { lat: 35.8578, lng: 114.3696, name: "安阳红旗渠机场", iata: "AYN" },
+  "安阳红旗渠机场": { lat: 35.870833, lng: 114.461944, name: "安阳红旗渠机场", iata: "HQQ" },
   "宜昌三峡机场": { lat: 30.5566, lng: 111.4800, name: "宜昌三峡机场", iata: "YIH" },
   "宜春明月山机场": { lat: 27.8025, lng: 114.3062, name: "宜春明月山机场", iata: "YIC" },
   "岳阳三荷机场": { lat: 29.2672, lng: 113.2817, name: "岳阳三荷机场", iata: "YYA" },
@@ -131,9 +131,9 @@ export const airportCoordinates: Record<string, { lat: number; lng: number; name
   "沧源佤山机场": { lat: 23.2756, lng: 99.3716, name: "沧源佤山机场", iata: "CWJ" },
   "泸州云龙机场": { lat: 29.1334, lng: 105.3928, name: "泸州云龙机场", iata: "LZO" },
   "洛阳北郊机场": { lat: 34.7411, lng: 112.3880, name: "洛阳北郊机场", iata: "LYA" },
-  "济宁曲阜机场": { lat: 35.2928, lng: 116.3467, name: "济宁曲阜机场", iata: "JNG" },
+  "济宁大安机场": { lat: 35.647358, lng: 116.743269, name: "济宁大安机场", iata: "JNG" },
   "淮安涟水国际机场": { lat: 33.7908, lng: 119.1250, name: "淮安涟水国际机场", iata: "HIA" },
-  "湘西边城机场": { lat: 28.3272, lng: 109.5995, name: "湘西边城机场", iata: "XFN" },
+  "湘西边城机场": { lat: 28.4972, lng: 109.5218, name: "湘西边城机场", iata: "DXJ" },
   "湛江吴川机场": { lat: 21.2144, lng: 110.3583, name: "湛江吴川机场", iata: "ZHA" },
   "满洲里西郊国际机场": { lat: 49.5668, lng: 117.3300, name: "满洲里西郊国际机场", iata: "NZH" },
   "澜沧景迈机场": { lat: 22.4178, lng: 99.7867, name: "澜沧景迈机场", iata: "JMJ" },
@@ -151,8 +151,9 @@ export const airportCoordinates: Record<string, { lat: number; lng: number; name
   "衡阳南岳机场": { lat: 26.7253, lng: 112.6278, name: "衡阳南岳机场", iata: "HNY" },
   "襄阳刘集机场": { lat: 32.1506, lng: 112.2914, name: "襄阳刘集机场", iata: "XFN" },
   "赣州黄金机场": { lat: 25.8538, lng: 114.7789, name: "赣州黄金机场", iata: "KOW" },
+  "赣州瑞金机场": { lat: 25.960236, lng: 116.077016, name: "赣州瑞金机场", iata: "JRJ" },
   "赤峰玉龙机场": { lat: 42.2350, lng: 118.9075, name: "赤峰玉龙机场", iata: "CIF" },
-  "达州金垭机场": { lat: 31.3102, lng: 107.4295, name: "达州金垭机场", iata: "DAX" },
+  "达州金垭机场": { lat: 31.048815, lng: 107.435646, name: "达州金垭机场", iata: "DZH" },
   "连云港花果山机场": { lat: 34.5717, lng: 118.8738, name: "连云港花果山机场", iata: "LYG" },
   "迪庆香格里拉机场": { lat: 27.7936, lng: 99.6772, name: "迪庆香格里拉机场", iata: "DIG" },
   "通辽机场": { lat: 43.5567, lng: 122.2000, name: "通辽机场", iata: "TGO" },
@@ -177,13 +178,30 @@ export const airportCoordinates: Record<string, { lat: number; lng: number; name
   "那拉提机场": { lat: 43.4322, lng: 83.3786, name: "那拉提机场", iata: "NLT" },
   "鄂州花湖国际机场": { lat: 30.3436, lng: 114.9214, name: "鄂州花湖国际机场", iata: "EHU" },
   "阆中古城机场": { lat: 31.6313, lng: 105.9685, name: "阆中古城机场", iata: "LZJ" },
-  "阿拉尔塔里木机场": { lat: 40.6309, lng: 81.3189, name: "阿拉尔塔里木机场", iata: "ACX" },
+  "阿拉尔塔里木机场": { lat: 40.434748, lng: 81.262060, name: "阿拉尔塔里木机场", iata: "ACF" },
   "霍林郭勒机场": { lat: 45.4872, lng: 119.4072, name: "霍林郭勒机场", iata: "HUO" },
   "苏南硕放国际机场": { lat: 31.4944, lng: 120.4294, name: "苏南硕放国际机场", iata: "WUX" },
   
   "延吉朝阳川国际机场": { lat: 42.8828, lng: 129.4508, name: "延吉朝阳川国际机场", iata: "YNJ" },
   "包头东河机场": { lat: 40.5600, lng: 109.9975, name: "包头东河机场", iata: "BAV" },
   "鄂尔多斯伊金霍洛国际机场": { lat: 39.4936, lng: 109.8614, name: "鄂尔多斯伊金霍洛国际机场", iata: "DSN" },
+
+  // 2026 秋季航线表新增或此前缺失的机场
+  "亳州机场": { lat: 33.560777, lng: 115.911859, name: "亳州机场", iata: "BZJ" },
+  "金昌金川机场": { lat: 38.542222, lng: 102.348333, name: "金昌金川机场", iata: "JIC" },
+  "丽水机场": { lat: 28.3727, lng: 119.839, name: "丽水机场", iata: "LIJ" },
+  "吐鲁番交河机场": { lat: 43.0308, lng: 89.0987, name: "吐鲁番交河机场", iata: "TLQ" },
+  "铜仁凤凰机场": { lat: 27.883333, lng: 109.308889, name: "铜仁凤凰机场", iata: "TEN" },
+  "阿勒泰雪都机场": { lat: 47.749886, lng: 88.085808, name: "阿勒泰雪都机场", iata: "AAT" },
+  "安顺黄果树机场": { lat: 26.260556, lng: 105.873333, name: "安顺黄果树机场", iata: "AVA" },
+  "嘉峪关酒泉机场": { lat: 39.859052, lng: 98.339344, name: "嘉峪关酒泉机场", iata: "JGN" },
+  "凯里黄平机场": { lat: 26.972, lng: 107.988, name: "凯里黄平机场", iata: "KJH" },
+  "营口兰旗机场": { lat: 40.542524, lng: 122.3586, name: "营口兰旗机场", iata: "YKH" },
+  "布尔津喀纳斯机场": { lat: 48.2223, lng: 86.9959, name: "布尔津喀纳斯机场", iata: "KJI" },
+  "若羌楼兰机场": { lat: 38.9747, lng: 88.0083, name: "若羌楼兰机场", iata: "RQA" },
+  "景德镇罗家机场": { lat: 29.3386, lng: 117.176, name: "景德镇罗家机场", iata: "JDZ" },
+  "固原六盘山机场": { lat: 36.0786, lng: 106.2169, name: "固原六盘山机场", iata: "GYU" },
+  "朝阳机场": { lat: 41.5381, lng: 120.435, name: "朝阳机场", iata: "CHG" },
   
   // 阿尔山伊尔施机场
   "阿尔山伊尔施机场": { lat: 47.3106, lng: 119.9117, name: "阿尔山伊尔施机场", iata: "YIE" },
@@ -246,6 +264,8 @@ export function getAirportCoordinatesByCity(city: string): { lat: number; lng: n
     "海口": { lat: 20.0442, lng: 110.1999, name: "海口市" },
     "拉萨": { lat: 29.6440, lng: 91.1144, name: "拉萨市" },
     "西宁": { lat: 36.6171, lng: 101.7782, name: "西宁市" },
+    // 蚌埠滕湖机场在源表发布时仍待官方班期复核，先使用城市中心作地图兜底。
+    "蚌埠": { lat: 32.9163, lng: 117.3893, name: "蚌埠市" },
     // 可以继续添加更多城市
   };
   

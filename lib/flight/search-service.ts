@@ -1,4 +1,4 @@
-import { addDays, parse, isWithinInterval } from 'date-fns';
+import { addDays, format, parseISO } from 'date-fns';
 import { 
   Flight, 
   Route, 
@@ -12,8 +12,14 @@ import {
   getDayOfWeek, 
   isInTimeWindow, 
   formatAbsoluteTime,
-  formatArrivalTime
+  formatArrivalTime,
+  isProductAvailable,
 } from './utils';
+import {
+  FLIGHT_DATA_PERIOD_LABEL,
+  RESTRICTED_PERIODS_666,
+  isWithinFlightDataPeriod,
+} from './data-period';
 
 class FlightSearchService {
   // 检查666版本的日期限制
@@ -22,32 +28,36 @@ class FlightSearchService {
       return false; // 2666版本不受限制
     }
 
-    // 解析日期
-    const checkDate = parse(date, 'yyyy-MM-dd', new Date());
-
-    // 666版本限制期间（节假日高峰期禁止搜索）
-    const restrictedPeriods = [
-      // 五一假期：4月30日-5月6日
-      { start: new Date('2025-04-30T00:00:00'), end: new Date('2025-05-06T23:59:59') },
-      // 国庆假期：9月30日-10月9日
-      { start: new Date('2025-09-30T00:00:00'), end: new Date('2025-10-09T23:59:59') },
-    ];
-
-    // 检查日期是否在任一限制期间内（包含边界）
-    return restrictedPeriods.some(period =>
-      isWithinInterval(checkDate, { start: period.start, end: period.end })
+    return RESTRICTED_PERIODS_666.some(
+      (period) => date >= period.start && date <= period.end
     );
+  }
+
+  private isFlightAvailableOnDate(flight: Flight, date: string): boolean {
+    if (flight.operating_dates?.length) {
+      return flight.operating_dates.includes(date);
+    }
+    if (flight.valid_from && date < flight.valid_from) return false;
+    if (flight.valid_to && date > flight.valid_to) return false;
+    return true;
   }
   // BFS搜索航班路线
   searchFlights(params: SearchParams): { routes: Route[], restriction?: string } {
     const { origin_city, dest_city, date, windows, max_stops, version = '666' } = params;
+
+    if (!isWithinFlightDataPeriod(date)) {
+      return {
+        routes: [],
+        restriction: `当前航班快照仅覆盖${FLIGHT_DATA_PERIOD_LABEL}`,
+      };
+    }
     
     // 检查666版本的日期限制（五一4.30-5.6、国庆9.30-10.9）
     if (this.isDateRestricted(date, version)) {
       console.log('666版本在节假日限制期间无法预订');
       return {
         routes: [],
-        restriction: '666版本节假日限制期间'
+        restriction: `666版本在${RESTRICTED_PERIODS_666[0].label}不可用`
       };
     }
     
@@ -66,6 +76,10 @@ class FlightSearchService {
     const firstDayFlights = flightDataService.getFlightsByOriginAndDay(origin_city, firstDayOfWeek);
     
     for (const flight of firstDayFlights) {
+      if (!this.isFlightAvailableOnDate(flight, date) || !isProductAvailable(flight.product, version)) {
+        continue;
+      }
+
       // 检查是否在时间窗口内
       if (!isInTimeWindow(flight.dep_minutes, windows, version)) {
         continue;
@@ -135,6 +149,15 @@ class FlightSearchService {
       
       for (const {flight, dayOffset} of flightsToCheck) {
         if (expandCount >= CONSTRAINTS.MAX_EXPAND_PER_NODE) break;
+
+        const segmentDateStr = format(addDays(parseISO(date), dayOffset), 'yyyy-MM-dd');
+        if (
+          !isWithinFlightDataPeriod(segmentDateStr) ||
+          !this.isFlightAvailableOnDate(flight, segmentDateStr) ||
+          !isProductAvailable(flight.product, version)
+        ) {
+          continue;
+        }
         
         // 检查是否访问过该城市（避免回环）
         if (node.visited_cities.has(flight.dest_city)) {
@@ -164,8 +187,6 @@ class FlightSearchService {
         
         // 检查后续航段（中转）的日期是否在限制期间
         // 666版本的中转航班也必须在限制期间外
-        const segmentDate = addDays(new Date(date), dayOffset);
-        const segmentDateStr = segmentDate.toISOString().split('T')[0];
         if (this.isDateRestricted(segmentDateStr, version)) {
           continue; // 跳过在限制期间的中转航段
         }

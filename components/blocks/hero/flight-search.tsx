@@ -13,6 +13,7 @@ import { FlightStats } from "./flight-stats"
 import { SearchResults } from "./search-results"
 import { Disclaimer } from "./disclaimer"
 import { Route, RoundtripRoute } from "@/lib/flight/types"
+import { FLIGHT_DATA_PERIOD } from "@/lib/flight/data-period"
 
 interface SearchParams {
   origin_city: string
@@ -26,25 +27,23 @@ interface SearchParams {
   return_windows?: string[]          // 新增：返程时间窗口
 }
 
-// 获取最早可用日期（不早于2025-09-01）
-function getMinDate() {
-  const flightStartDate = new Date('2025-09-01');
+function getDefaultDate() {
   const today = new Date();
-  
-  // 如果今天早于2025-09-01，返回2025-09-01
-  if (today < flightStartDate) {
-    return flightStartDate.toISOString().split("T")[0];
-  }
-  
-  // 否则返回今天的日期
-  return today.toISOString().split("T")[0];
+  const todayText = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0"),
+  ].join("-");
+  return todayText >= FLIGHT_DATA_PERIOD.start && todayText <= FLIGHT_DATA_PERIOD.end
+    ? todayText
+    : FLIGHT_DATA_PERIOD.start;
 }
 
 export function FlightSearch() {
   const [searchParams, setSearchParams] = useState<SearchParams>({
     origin_city: "",
     dest_city: "",
-    date: getMinDate(),
+    date: getDefaultDate(),
     windows: ["early", "late"],
     max_stops: 1,
     version: "666",
@@ -266,7 +265,8 @@ export function FlightSearch() {
                       : prev.return_date
                   }))}
                   className="w-full max-w-full min-w-0 pl-10 text-sm h-9 sm:h-10 cursor-pointer text-left appearance-none [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
-                  min={getMinDate()}
+                  min={FLIGHT_DATA_PERIOD.start}
+                  max={FLIGHT_DATA_PERIOD.end}
                 />
               </div>
             </div>
@@ -283,7 +283,8 @@ export function FlightSearch() {
                     value={searchParams.return_date}
                     onChange={(e) => setSearchParams((prev) => ({ ...prev, return_date: e.target.value }))}
                     className="w-full max-w-full min-w-0 pl-10 text-sm h-9 sm:h-10 cursor-pointer text-left appearance-none [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:inset-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
-                    min={searchParams.date || getMinDate()}
+                    min={searchParams.date || FLIGHT_DATA_PERIOD.start}
+                    max={FLIGHT_DATA_PERIOD.end}
                   />
                 </div>
               </div>

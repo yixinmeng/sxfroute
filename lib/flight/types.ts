@@ -15,6 +15,10 @@ export interface Flight {
   arr_minutes: number;         // 到达时间（0-1439分钟）
   overnight: boolean;          // 是否跨日（arr < dep）
   product?: string;            // 适用产品（如 666 / 2666）
+  source_note?: string;        // 原表备注
+  valid_from?: string;         // 生效日期（YYYY-MM-DD，含）
+  valid_to?: string;           // 失效日期（YYYY-MM-DD，含）
+  operating_dates?: string[];  // 仅在这些指定日期运行
 }
 
 // 航段信息（搜索结果中的单段）

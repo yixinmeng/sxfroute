@@ -133,6 +133,17 @@ export function is2666Exclusive(depMinutes: number): boolean {
   return depHour === 19 || (depHour === 8 && depMinute > 0) || (depHour === 9 && depMinute === 0);
 }
 
+// 按 CSV 的产品字段判断档位；缺失产品字段时兼容旧数据，默认两个档位都可用。
+export function isProductAvailable(product: string | undefined, version: '666' | '2666'): boolean {
+  if (!product) return true;
+  const products = product.split(/[^0-9]+/).filter(Boolean);
+  return products.includes(version);
+}
+
+export function is2666OnlyProduct(product: string | undefined): boolean {
+  return isProductAvailable(product, '2666') && !isProductAvailable(product, '666');
+}
+
 // 按候选键名从 CSV record 取第一个非空字段，兼容历史表头差异（如 "出港城市" / "起飞城市"）
 export function getCsvField(record: Record<string, string>, keys: string[]): string {
   for (const key of keys) {

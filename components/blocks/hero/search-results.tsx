@@ -544,14 +544,14 @@ export function SearchResults({ routes, loading, searched, restriction, roundtri
             <div className="text-center">
               <Plane className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                {restriction ? "666版本在限制期间无法预订" : "未找到符合条件的航班"}
+                {restriction ? "当前查询日期不可用" : "未找到符合条件的航班"}
               </h3>
               {restriction ? (
                 <div className="text-gray-600 mt-4">
-                  <p className="mb-4">您选择的日期在666版本限制期间内（2025年9月30日-10月9日）</p>
+                  <p className="mb-4">{restriction}</p>
                   <div className="space-y-2 text-sm">
-                    <p>• 选择2025年9月30日之前或10月10日之后的日期</p>
-                    <p>• 升级到2666版本可以直接预订</p>
+                    <p>• 请在数据覆盖日期内重新选择出发日期</p>
+                    {restriction.includes("666版本") && <p>• 2666版本不受该国庆限制</p>}
                   </div>
                 </div>
               ) : (

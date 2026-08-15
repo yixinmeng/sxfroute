@@ -13,6 +13,8 @@
 
 The flight data bundled with this project is a **manually-compiled historical snapshot** from publicly available Hainan Airlines flight schedules. It is **not real-time, not official, and not guaranteed to be accurate**. **Do not use it for any booking or travel decision.** This project is **not affiliated with, endorsed by, sponsored by, or in any way officially connected to** Hainan Airlines Holding Co., Ltd. or HNA Group.
 
+当前仓库内的快照由 2026 年秋季航线表整表转换，年份通过“指定日期与班期星期”交叉校验为 **2026 年**，系统查询窗口为 **2026-09-01 至 2026-10-24**。源表没有单独填写全局截止日；10 月 24 日按 2026 夏秋航季边界采用，使用前仍应以航司实际展示为准。
+
 ## 维护策略 / Maintenance Policy
 
 **本项目不接受航班数据更新 PR。**
@@ -68,8 +70,14 @@ The flight data bundled with this project is a **manually-compiled historical sn
 | `arr_minutes` | number | 到达时间（自当日 0 点起的分钟数，0–1439） |
 | `overnight` | boolean | 是否跨日（`arr_minutes < dep_minutes`） |
 | `product` | string? | 适用产品（如 `666` / `2666`），可选 |
+| `source_note` | string? | 原始表格备注（如 `9.28始`、`仅9.9`） |
+| `valid_from` | string? | 航班生效日期，`YYYY-MM-DD`，包含边界 |
+| `valid_to` | string? | 航班失效日期，`YYYY-MM-DD`，包含边界 |
+| `operating_dates` | string[]? | 只在指定日期运行；CSV 中用 `|` 分隔 |
 
 > 字段定义以 `lib/flight/types.ts` 中的 TypeScript 类型为准。
+
+CSV 对应扩展列为 `备注`、`有效开始日期`、`有效结束日期`、`指定日期` 和 `来源行`。搜索服务会先检查具体日期是否命中这些规则，再检查星期班期、会员产品和时间窗口；不能删除这些扩展列后仅保留周班期，否则 196 条带日期限制的记录会被错误扩展到整个航季。
 
 ## 许可与使用限制 / License & Usage Restrictions
 
