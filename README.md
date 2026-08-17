@@ -1,3 +1,5 @@
+
+
 # 海航随心飞助手
 
 > 中国国内航班数据查询与路线规划工具，针对"海航随心飞"使用场景优化的航线搜索助手。
@@ -157,7 +159,7 @@ data/             # 航班数据 CSV（可热更新，详见 DATA.md）
 
 ## 🤝 贡献
 
-欢迎 Bug 修复 PR！请先阅读 [CONTRIBUTING.md](./CONTRIBUTING.md) 与 [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)。
+欢迎 Bug 修复 PR！请先阅读 [CONTRIBUTING.md](./CONTRIBUTING.md) 与 [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md)。提交前请在本地运行 `pnpm lint` 和 `pnpm build`（CI 也会执行这两项检查）。
 
 **这是一个个人业余维护的项目**，不接受新功能 PR 的默认合并，需要先开 Issue 讨论。也不接受航班数据更新 PR（数据为历史快照）。
 
